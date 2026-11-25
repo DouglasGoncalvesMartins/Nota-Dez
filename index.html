@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotaDez - Conectando Alunos, Transformando Notas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2b7a78;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #feffff;
+            background-color: #3aafa9;
+            padding: 2px 8px;
+            border-radius: 5px;
+            margin-left: 4px;
+        }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #17252a;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #17252a;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #3aafa9;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #3aafa9 0%, #2b7a78 100%);
+            color: white;
+            text-align: center;
+            padding: 90px 20px;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .btn-cta {
+            background-color: #feffff;
+            color: #2b7a78;
+            padding: 12px 32px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            background-color: #e5e5e5;
+        }
+
+        .vantagens {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .vantagens h2 {
+            font-size: 32px;
+            color: #17252a;
+            margin-bottom: 40px;
+        }
+
+        .grid-vantagens {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 5px solid #3aafa9;
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+            color: #2b7a78;
+            font-size: 22px;
+        }
+
+        .estatisticas {
+            background-color: #17252a;
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .grid-dados {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+
+        .dado h4 {
+            font-size: 36px;
+            color: #3aafa9;
+        }
+
+        .modal-fundo {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            z-index: 200;
+        }
+
+        .modal-fundo.ativo {
+            display: flex;
+        }
+
+        .modal-caixa {
+            background: white;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .modal-topo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 12px;
+            margin-bottom: 18px;
+        }
+
+        .modal-topo h3 {
+            color: #2b7a78;
+        }
+
+        .fechar-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .campo {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .campo label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .campo input, .campo select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .btn-enviar {
+            width: 100%;
+            background-color: #3aafa9;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-enviar:hover {
+            background-color: #2b7a78;
+        }
+
+        .alerta-sucesso {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background-color: #d1e7dd;
+            color: #0f5132;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        footer {
+            background-color: #def2f1;
+            color: #17252a;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+
+            nav {
+                width: 100%;
+                display: none;
+                margin-top: 15px;
+            }
+
+            nav.aberto {
+                display: block;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo">Nota<span>Dez</span></a>
+            <button class="menu-btn" id="btnMenu">&#9776;</button>
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#vantagens">Vantagens</a></li>
+                    <li><a href="#como-funciona">Como Funciona</a></li>
+                    <li><a href="#" class="abrir-modal">Quero Ser Tutor</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Apoio escolar de aluno para aluno.</h1>
+                <p>Conectamos estudantes do Ensino Médio que dominam as matérias com alunos do Ensino Fundamental que precisam de uma força nos estudos.</p>
+                <button class="btn-cta abrir-modal">Começar Agora</button>
+            </div>
+        </section>
+
+        <section id="vantagens" class="vantagens container">
+            <h2>Por que escolher o NotaDez?</h2>
+            <div class="grid-vantagens">
+                <div class="card">
+                    <h3>Linguagem Simples</h3>
+                    <p>Aprenda com quem entende a sua rotina. Explicações diretas, sem complicação e no ritmo do estudante.</p>
+                </div>
+                <div class="card">
+                    <h3>Para os Tutores</h3>
+                    <p>Alunos tutores do Ensino Médio reforçam o próprio conhecimento e garantem certificados de horas voluntárias.</p>
+                </div>
+                <div class="card">
+                    <h3>Ambiente Seguro</h3>
+                    <p>Todas as monitorias virtuais são gravadas e revisadas pela nossa equipe pedagógica para total segurança.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="como-funciona" class="estatisticas">
+            <div class="container grid-dados">
+                <div class="dado">
+                    <h4>+<span class="contador" data-alvo="500">0</span></h4>
+                    <p>Alunos Ajudados</p>
+                </div>
+                <div class="dado">
+                    <h4><span class="contador" data-alvo="40">0</span>%</h4>
+                    <p>Média de Aumento nas Notas</p>
+                </div>
+                <div class="dado">
+                    <h4><span class="contador" data-alvo="15">0</span>+</h4>
+                    <p>Matérias Disponíveis</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-fundo" id="modalCadastro">
+        <div class="modal-caixa">
+            <div class="modal-topo">
+                <h3>Inscreva-se no NotaDez</h3>
+                <button class="fechar-modal" id="fecharModal">&times;</button>
+            </div>
+            <form id="formInscricao">
+                <div class="campo">
+                    <label>Nome completo</label>
+                    <input type="text" id="nomeAluno" required>
+                </div>
+                <div class="campo">
