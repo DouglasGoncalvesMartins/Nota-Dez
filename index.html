@@ -12,6 +12,10 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: #f4f7f6;
             color: #333;
@@ -119,15 +123,21 @@
             background-color: #e5e5e5;
         }
 
-        .vantagens {
-            padding: 60px 0;
+        .secao {
+            padding: 65px 0;
             text-align: center;
         }
 
-        .vantagens h2 {
+        .secao-titulo {
             font-size: 32px;
             color: #17252a;
-            margin-bottom: 40px;
+            margin-bottom: 12px;
+        }
+
+        .secao-subtitulo {
+            color: #555;
+            max-width: 620px;
+            margin: 0 auto 40px;
         }
 
         .grid-vantagens {
@@ -142,12 +152,97 @@
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             border-top: 5px solid #3aafa9;
+            transition: transform 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
         }
 
         .card h3 {
             margin-bottom: 12px;
             color: #2b7a78;
             font-size: 22px;
+        }
+
+        .como-funciona {
+            background-color: #ffffff;
+        }
+
+        .grid-passos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+        }
+
+        .passo {
+            padding: 25px 20px;
+            border-radius: 10px;
+            background-color: #f4f7f6;
+            border: 1px solid #e0eceb;
+        }
+
+        .passo-numero {
+            width: 42px;
+            height: 42px;
+            background-color: #3aafa9;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+        }
+
+        .passo h3 {
+            color: #17252a;
+            margin-bottom: 8px;
+            font-size: 19px;
+        }
+
+        .grid-materias {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .materia-card {
+            background: white;
+            padding: 24px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .materia-card h3 {
+            color: #2b7a78;
+            font-size: 20px;
+        }
+
+        .materia-card p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .btn-materia {
+            background-color: #def2f1;
+            color: #2b7a78;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-materia:hover {
+            background-color: #3aafa9;
+            color: white;
         }
 
         .estatisticas {
@@ -166,6 +261,54 @@
         .dado h4 {
             font-size: 36px;
             color: #3aafa9;
+        }
+
+        .faq-lista {
+            max-width: 760px;
+            margin: 0 auto;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .faq-pergunta {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 18px 20px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            color: #17252a;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-pergunta:hover {
+            color: #2b7a78;
+        }
+
+        .faq-resposta {
+            display: none;
+            padding: 0 20px 18px;
+            color: #555;
+            font-size: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .faq-item.aberto .faq-resposta {
+            display: block;
+            padding-top: 12px;
         }
 
         .modal-fundo {
@@ -263,7 +406,7 @@
             background-color: #def2f1;
             color: #17252a;
             text-align: center;
-            padding: 20px;
+            padding: 24px 20px;
             font-size: 14px;
             margin-top: 40px;
         }
@@ -276,95 +419,17 @@
             nav {
                 width: 100%;
                 display: none;
-                margin-top: 15px;
-            }
-
-            nav.aberto {
-                display: block;
-            }
-
-            nav ul {
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .hero h1 {
-                font-size: 30px;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <div class="container navbar">
-            <a href="#" class="logo">Nota<span>Dez</span></a>
-            <button class="menu-btn" id="btnMenu">&#9776;</button>
-            <nav id="navMenu">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#vantagens">Vantagens</a></li>
-                    <li><a href="#como-funciona">Como Funciona</a></li>
-                    <li><a href="#" class="abrir-modal">Quero Ser Tutor</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Apoio escolar de aluno para aluno.</h1>
-                <p>Conectamos estudantes do Ensino Médio que dominam as matérias com alunos do Ensino Fundamental que precisam de uma força nos estudos.</p>
-                <button class="btn-cta abrir-modal">Começar Agora</button>
-            </div>
-        </section>
-
-        <section id="vantagens" class="vantagens container">
-            <h2>Por que escolher o NotaDez?</h2>
-            <div class="grid-vantagens">
-                <div class="card">
-                    <h3>Linguagem Simples</h3>
-                    <p>Aprenda com quem entende a sua rotina. Explicações diretas, sem complicação e no ritmo do estudante.</p>
-                </div>
-                <div class="card">
-                    <h3>Para os Tutores</h3>
-                    <p>Alunos tutores do Ensino Médio reforçam o próprio conhecimento e garantem certificados de horas voluntárias.</p>
-                </div>
-                <div class="card">
-                    <h3>Ambiente Seguro</h3>
-                    <p>Todas as monitorias virtuais são gravadas e revisadas pela nossa equipe pedagógica para total segurança.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="como-funciona" class="estatisticas">
-            <div class="container grid-dados">
-                <div class="dado">
-                    <h4>+<span class="contador" data-alvo="500">0</span></h4>
-                    <p>Alunos Ajudados</p>
-                </div>
-                <div class="dado">
-                    <h4><span class="contador" data-alvo="40">0</span>%</h4>
-                    <p>Média de Aumento nas Notas</p>
-                </div>
-                <div class="dado">
-                    <h4><span class="contador" data-alvo="15">0</span>+</h4>
-                    <p>Matérias Disponíveis</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <div class="modal-fundo" id="modalCadastro">
-        <div class="modal-caixa">
-            <div class="modal-topo">
-                <h3>Inscreva-se no NotaDez</h3>
-                <button class="fechar-modal" id="fecharModal">&times;</button>
-            </div>
-            <form id="formInscricao">
-                <div class="campo">
-                    <label>Nome completo</label>
-                    <input type="text" id="nomeAluno" required>
-                </div>
-                <div class="campo">
+Use o código com cuidado.
+margin-top: 15px;
+}
+nav.aberto {
+display: block;
+}
+nav ul {
+flex-direction: column;
+gap: 12px;
+}
+.hero h1 {
+font-size: 30px;
+}
+}
